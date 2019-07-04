@@ -8,12 +8,12 @@
              _e( "Installation Date: ", "add_extra_fields");
              ?>
         <br>
-        <input type="text" name="add_installation_date" class="add_installation_date" placeholder="Installation Date">
+        <input type="text" name="add_installation_date" class="add_installation_date" placeholder="Installation Date" readonly="readonly">
         <script>
         jQuery(document).ready(function($) {
             $(".add_installation_date").datepicker({
                 minDate: 0,
-                dateFormat: 'dd-mm-yy',
+                dateFormat: 'yy-mm-dd',
             });
         });
         </script>
@@ -79,7 +79,7 @@
                      ?>
             </div>
             <div class="edit_address">
-                <?php woocommerce_wp_text_input( array( 'class' => 'date-picker','id' => '_delivery_date', 'label' => __( 'Installation date' ), 'wrapper_class' => '_billing_company_field' ) ); ?>
+                <?php woocommerce_wp_text_input( array( 'class' => 'date-picker','id' => '_delivery_date', 'label' => __( 'Installation date' ), 'wrapper_class' => '_billing_company_field', 'placeholder' => 'Installation date' , 'custom_attributes' => ['style' => 'width:100%!important;'] ) ); ?>
             </div>
         </div>
         <?php }
