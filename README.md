@@ -97,6 +97,7 @@
 
 # change select option in archive page (shop page)  
 Change "Select option" to "Order now"  
+
         //change select option in archive page (shop page)
         add_filter( 'add_to_cart_text', 'woo_custom_product_add_to_cart_text' );            // < 2.1
         add_filter( 'woocommerce_product_add_to_cart_text', 'woo_custom_product_add_to_cart_text' );  // 2.1 +
