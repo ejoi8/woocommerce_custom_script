@@ -91,3 +91,16 @@
             update_post_meta( $post_id, '_delivery_date', wc_clean( $_POST[ '_delivery_date' ] ) );
         }
         add_action( 'woocommerce_process_shop_order_meta', 'save_extra_details', 45, 2 );
+
+
+
+
+# change select option in archive page (shop page)
+        //change select option in archive page (shop page)
+        add_filter( 'add_to_cart_text', 'woo_custom_product_add_to_cart_text' );            // < 2.1
+        add_filter( 'woocommerce_product_add_to_cart_text', 'woo_custom_product_add_to_cart_text' );  // 2.1 +
+
+        function woo_custom_product_add_to_cart_text() {
+
+            return __( 'Order now', 'woocommerce' );
+        }
