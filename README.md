@@ -92,6 +92,7 @@
         }
         add_action( 'woocommerce_process_shop_order_meta', 'save_extra_details', 45, 2 );
 
+ref : https://rudrastyh.com/woocommerce/customize-order-details.html
 
 
 
