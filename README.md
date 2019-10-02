@@ -379,6 +379,7 @@ Change "Select option" to "Order now"
 
 # Add a Link Back to the Order in WooCommerce New Order Notifications Email
 
+        // Add a Link Back to the Order in WooCommerce New Order Notifications Email
         add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
         function add_link_back_to_order( $order, $is_admin ) {
 
@@ -405,7 +406,8 @@ Change "Select option" to "Order now"
         }
         
 # add short description to email notifications
-
+        
+        // add short description to email notifications
         add_action( 'woocommerce_order_item_meta_end', 'product_description_in_new_email_notification', 10, 4 );
         function product_description_in_new_email_notification( $item_id, $item, $order = null, $plain_text = false ){
             $product = $item->get_product();
@@ -419,7 +421,8 @@ Change "Select option" to "Order now"
         }
 
 # added by izzul - for kewangan puspanita verify order. only can view woocommerce orders
-
+        
+        // added by izzul - for kewangan puspanita verify order. only can view woocommerce orders
         add_action( 'admin_menu', 'remove_menu_pages', 999);
         function remove_menu_pages() {
           global $current_user;
