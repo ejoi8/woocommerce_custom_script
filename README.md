@@ -430,9 +430,11 @@ Change "Select option" to "Order now"
           $user_roles = $current_user->roles;
           $user_role = array_shift($user_roles);
           if($user_role == "kewangan_puspanita") {
-            $remove_submenu = remove_submenu_page('woocommerce', 'wc-settings'); //hide woocommerce setting
-            $remove_submenu = remove_submenu_page('woocommerce', 'wc-addons'); //hide woocommerce addon
-            $remove_submenu = remove_submenu_page('woocommerce', 'wcj-tools');//hide booster tools
-            $remove_submenu = remove_submenu_page('woocommerce', 'wc-status');//hide woocommerce status
+            // remove_menu_page( 'themes.php' );
+            // remove_submenu_page( 'options-general.php','options-media.php' );
+            remove_submenu_page('woocommerce', 'wc-settings'); //hide woocommerce setting
+            remove_submenu_page('woocommerce', 'wc-addons'); //hide woocommerce addon
+            remove_submenu_page('woocommerce', 'wcj-tools');//hide booster tools
+            remove_submenu_page('woocommerce', 'wc-status');//hide woocommerce status
           }
         }
