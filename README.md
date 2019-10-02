@@ -417,3 +417,19 @@ Change "Select option" to "Order now"
             // Display the product short description
             echo '<div class="product-description" style="margin:10px 0 0;"><p>' . $product->get_short_description() . '</p></div>';
         }
+
+# added by izzul - for kewangan puspanita verify order. only can view woocommerce orders
+
+        add_action( 'admin_menu', 'remove_menu_pages', 999);
+        function remove_menu_pages() {
+          global $current_user;
+
+          $user_roles = $current_user->roles;
+          $user_role = array_shift($user_roles);
+          if($user_role == "kewangan_puspanita") {
+            $remove_submenu = remove_submenu_page('woocommerce', 'wc-settings'); //hide woocommerce setting
+            $remove_submenu = remove_submenu_page('woocommerce', 'wc-addons'); //hide woocommerce addon
+            $remove_submenu = remove_submenu_page('woocommerce', 'wcj-tools');//hide booster tools
+            $remove_submenu = remove_submenu_page('woocommerce', 'wc-status');//hide woocommerce status
+          }
+        }
