@@ -376,3 +376,44 @@ Change "Select option" to "Order now"
             // wc_clean() and wc_sanitize_textarea() are WooCommerce sanitization functions
         }
         add_action( 'woocommerce_process_shop_order_meta', 'woo_edit_custom_general_fields_save' );
+
+# Add a Link Back to the Order in WooCommerce New Order Notifications Email
+
+        add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
+        function add_link_back_to_order( $order, $is_admin ) {
+
+        $test_order = new WC_Order($order->id);
+        $test_order_key = $test_order->order_key;
+
+        if ( $order->has_status( 'on-hold' ) || $order->has_status( 'completed' )) {
+          //link for customer view thank you page to upload payment slip
+          $link = '<h2><a href="'.get_site_url().'/checkout/order-received/'.absint( $order->id ).'/?key='.$test_order_key.'" >'.__( 'Klik sini untuk upload bukti bayaran ', 'shop.puspanita.org.my' ).'</a></h2></br></br>';
+
+          if ($is_admin ) {
+          //link for admin to view woocommerce order ini admin dashboard
+          $link .= '<p>';
+          $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
+          $link .= __( 'Click here to go to the order page', 'shop.puspanita.org.my' );
+          $link .= '</a>';
+          $link .= '</p></br></br>';
+          }
+
+          // Return the link into the email
+          echo $link;
+          }
+
+        }
+        
+# add short description to email notifications
+
+        add_action( 'woocommerce_order_item_meta_end', 'product_description_in_new_email_notification', 10, 4 );
+        function product_description_in_new_email_notification( $item_id, $item, $order = null, $plain_text = false ){
+            $product = $item->get_product();
+
+            // Handling product variations
+            if( $product->is_type('variation') )
+                $product = wc_get_product( $item->get_product_id() );
+
+            // Display the product short description
+            echo '<div class="product-description" style="margin:10px 0 0;"><p>' . $product->get_short_description() . '</p></div>';
+        }
