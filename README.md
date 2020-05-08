@@ -438,3 +438,13 @@ Change "Select option" to "Order now"
             remove_submenu_page('woocommerce', 'wc-status');//hide woocommerce status
           }
         }
+
+# lock status dropdown in edit order page - to avoid user playaround with status and mess up flow
+
+        // lock if status == cancelled
+        if(jQuery( "#order_status option:selected" ).val()=="wc-cancelled"){ jQuery('#order_status').select2("enable", false); }
+        
+        // lock if status == Completed
+        if(jQuery( "#order_status option:selected" ).val()=="wc-completed"){ jQuery('#order_status').select2("enable", false); }
+        
+        
