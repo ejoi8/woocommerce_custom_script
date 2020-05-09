@@ -461,9 +461,9 @@ Change "Select option" to "Order now"
                         $attr_string[] = $attr_value;
                     }
                     if ( $key['max_qty'] > 0 ) { 
-                      echo '<br/>' . implode( ', ', $attr_string ) . ': ' . $key['max_qty'] . ' in stock'; 
+                      echo '<span style="padding: 0px 3px;text-transform: uppercase;font-size:10px">'.implode( ', ', $attr_string ).'</span> '; 
                     } else { 
-                      echo '<br/>' . implode(', ', $attr_string ) . ': out of stock'; 
+                      echo '<span style="color:red;text-transform: uppercase;font-size:10px;text-decoration: line-through;">'.implode(', ', $attr_string ).'</span>'; 
                     }
                 }
             }
