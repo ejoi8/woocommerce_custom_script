@@ -478,7 +478,7 @@ Change "Select option" to "Order now"
         add_action( 'woocommerce_before_add_to_cart_button', 'izoolz_show_variant_at_single_page', 20 );
  
         function izoolz_show_variant_at_single_page() {
-                $product = wc_get_product();
+                global $product;
 
                 if ( $product->is_type( 'variable' ) ) {
                         echo '<div style="font-size:10px">Please choose at the dropdown above.</div>';
