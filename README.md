@@ -1,5 +1,7 @@
 # Woocommerce custom script
 
+useful page https://businessbloomer.com/woocommerce-visual-hook-guide-single-product-page/
+
 # Adding the new custom field on the WooCommerce checkout page (date)
         <?php
 
