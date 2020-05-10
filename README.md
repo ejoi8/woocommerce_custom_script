@@ -491,6 +491,6 @@ Change "Select option" to "Order now"
                                         echo  '<span style="padding: 0px 10px;color:white;text-transform: uppercase;font-size:15px;text-decoration: line-through;background-color:red;float:left;border: 1px solid white;">'.$scs_wc_size.'</span>';
                                 }
                         }
+                        echo '</div>';
                 }
-                echo '</div>';
         }
