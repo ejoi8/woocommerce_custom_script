@@ -53,7 +53,8 @@ useful page https://businessbloomer.com/woocommerce-visual-hook-guide-single-pro
              }
             return $fields;
         }
-
+        
+        //add info in order received data. Ex: installatino date or tracking no
         add_filter( 'woocommerce_order_details_after_order_table', 'add_installation_date_to_order_received_page', 10 , 1 );
         function add_installation_date_to_order_received_page ( $order ) {
             if( version_compare( get_option( 'woocommerce_version' ), '3.0.0', ">=" ) ) {            
