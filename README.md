@@ -450,9 +450,10 @@ Change "Select option" to "Order now"
         
 # Display Variations' Stock @ WooCommerce Shop
 
-        add_action( 'woocommerce_after_shop_loop_item', 'bbloomer_echo_stock_variations_loop' );
+        add_action( 'woocommerce_after_shop_loop_item', 'izoolz_show_stock_variations_loop' );
     
-        function bbloomer_echo_stock_variations_loop(){
+        function izoolz_show_stock_variations_loop(){
+                echo '<center><div>';
             global $product;
             if ( $product->get_type() == 'variable' ) {
                 foreach ( $product->get_available_variations() as $key ) {
@@ -461,10 +462,35 @@ Change "Select option" to "Order now"
                         $attr_string[] = $attr_value;
                     }
                     if ( $key['max_qty'] > 0 ) { 
-                      echo '<span style="padding: 0px 3px;text-transform: uppercase;font-size:10px">'.implode( ', ', $attr_string ).'</span> '; 
+                      echo '<span style="margin-left:-4px;padding: 5px 5px;text-transform: uppercase;font-size:8px;background-color:#CCCCCC;">'.implode( ', ', $attr_string ).'</span> '; 
                     } else { 
-                      echo '<span style="color:red;text-transform: uppercase;font-size:10px;text-decoration: line-through;">'.implode(', ', $attr_string ).'</span>'; 
+                      echo '<span style="margin-left:-3px;color:white;text-transform: uppercase;font-size:8px;text-decoration: line-through;background-color:red;padding:5px 5px;">'.implode(', ', $attr_string ).'</span>'; 
                     }
                 }
             }
+            echo '</div></center>';
+        }
+        
+# Display Variations' Stock @ WooCommerce single page product
+
+        add_action( 'woocommerce_before_add_to_cart_button', 'izoolz_show_variant_at_single_page', 20 );
+ 
+        function izoolz_show_variant_at_single_page() {
+                $product = wc_get_product();
+
+                if ( $product->is_type( 'variable' ) ) {
+                        echo '<div style="font-size:10px">Please choose at the dropdown above.</div>';
+                        echo '<div style="margin-bottom:30px;overflow: auto;">';
+                        $variations = $product->get_available_variations();
+                        $display_att ='';
+                        foreach ($variations as $key => $value){
+                                $scs_wc_size = $value['attributes']['attribute_pa_size'];
+                                if ( $value['max_qty'] > 0 ) { 
+                      echo '<span style="padding: 0px 10px;text-transform: uppercase;font-size:15px;background-color:#CCCCCC;float:left;border: 1px solid white">'.$scs_wc_size.'</span> '; 
+                    } else{
+                                        echo  '<span style="padding: 0px 10px;color:white;text-transform: uppercase;font-size:15px;text-decoration: line-through;background-color:red;float:left;border: 1px solid white;">'.$scs_wc_size.'</span>';
+                                }
+                        }
+                }
+                echo '</div>';
         }
