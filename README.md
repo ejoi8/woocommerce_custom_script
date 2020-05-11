@@ -532,6 +532,9 @@ Change "Select option" to "Order now"
               }
 
         }
+        
+Visual email hook: https://businessbloomer.com/woocommerce-visual-hook-guide-emails/
+https://businessbloomer.com/category/woocommerce-tips/visual-hook-series/
 
 # Add custom field in \_tracking in _Order receive page_ . In this case, show tracking no to customer
 
