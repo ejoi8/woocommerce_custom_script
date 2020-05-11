@@ -498,3 +498,37 @@ Change "Select option" to "Order now"
                         echo '</div>';
                 }
         }
+
+# Add link to Order Received page in Email - useful for guest with no registered account
+
+        // Add a Link Back to the Order in WooCommerce New Order Notifications Email
+        add_action( 'woocommerce_email_order_details', 'add_link_back_to_order', 10, 2 );
+        function add_link_back_to_order( $order, $is_admin ) {
+
+            $order_info = new WC_Order($order->get_id());
+            $order_key = $order->get_order_key();
+            $link = '';
+
+            if ( $order_info->has_status( 'processing' ) || $order_info->has_status( 'completed' )) {
+
+                  if ($is_admin ) {
+                      //link for admin to view woocommerce order ini admin dashboard
+                      $link .= '<p>';
+                      $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order_info->get_id() ) . '&action=edit' ) .'" >';
+                      $link .= __( 'Click here to manage the order.');
+                      $link .= '</a>';
+                      $link .= '</p></br></br>';
+                  } else {
+                    //link for customer view thank you page to upload payment slip
+                      $link .= '<p>';
+                      $link .= '<a href="'.get_site_url().'/checkout/order-received/'.absint( $order_info->get_id() ).'/?key='.$order_key.'" >';
+                      $link .= __( 'Click here to see your order details in web browser.');
+                      $link .= '</a>';
+                      $link .= '</p></br></br>';
+                  }
+
+              echo $link;
+
+              }
+
+        }
