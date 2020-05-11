@@ -384,27 +384,28 @@ Change "Select option" to "Order now"
 
         // Add a Link Back to the Order in WooCommerce New Order Notifications Email
         add_action( 'woocommerce_email_after_order_table', 'add_link_back_to_order', 10, 2 );
+
         function add_link_back_to_order( $order, $is_admin ) {
 
-        $test_order = new WC_Order($order->id);
-        $test_order_key = $test_order->order_key;
+            $order = new WC_Order($order->get_id());
+            $order_key = $order->get_order_key();
 
-        if ( $order->has_status( 'on-hold' ) || $order->has_status( 'completed' )) {
-          //link for customer view thank you page to upload payment slip
-          $link = '<h2><a href="'.get_site_url().'/checkout/order-received/'.absint( $order->id ).'/?key='.$test_order_key.'" >'.__( 'Klik sini untuk upload bukti bayaran ', 'shop.puspanita.org.my' ).'</a></h2></br></br>';
+            if ( $order->has_status( 'processing' ) || $order->has_status( 'completed' )) {
+              //link for customer view thank you page to upload payment slip
+              $link = '<h2><a href="'.get_site_url().'/checkout/order-received/'.absint( $order->get_id() ).'/?key='.$order_key.'" >'.__( 'Klik sini untuk ke page order').'</a></h2></br></br>';
 
-          if ($is_admin ) {
-          //link for admin to view woocommerce order ini admin dashboard
-          $link .= '<p>';
-          $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->id ) . '&action=edit' ) .'" >';
-          $link .= __( 'Click here to go to the order page', 'shop.puspanita.org.my' );
-          $link .= '</a>';
-          $link .= '</p></br></br>';
-          }
+              if ($is_admin ) {
+                  //link for admin to view woocommerce order ini admin dashboard
+                  $link .= '<p>';
+                  $link .= '<a href="'. admin_url( 'post.php?post=' . absint( $order->get_id() ) . '&action=edit' ) .'" >';
+                  $link .= __( 'Click here to go to the order page');
+                  $link .= '</a>';
+                  $link .= '</p></br></br>';
+              }
 
-          // Return the link into the email
-          echo $link;
-          }
+              // Return the link into the email
+              echo $link;
+              }
 
         }
         
