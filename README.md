@@ -586,11 +586,12 @@ reference https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-securit
         }
         add_filter( 'woocommerce_shop_manager_editable_roles', 'myextension_shop_manager_role_edit_capabilities' ); 
         
-# override search query to search only products
-        add_action( 'pre_get_posts', 'overide_posts_query_to_product' );
+# DIVI search menu only search products
 
-        function overide_posts_query_to_product( $query ) {
-          if( ! is_admin() && is_search() && $query->is_main_query() ) {
-            $query->set( 'post_type', 'product' );
-          }
-        }
+add to WP Admin > Divi > Theme Options > Integration > Body Code:
+
+        <script>
+            jQuery(function($){
+                $( ".et-search-form" ).append( '<input type="hidden" name="post_type" value="product" />' );
+            });
+        </script>
