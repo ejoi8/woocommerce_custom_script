@@ -585,3 +585,12 @@ reference https://woocommerce.wordpress.com/2018/10/11/woocommerce-3-4-6-securit
             return $roles;
         }
         add_filter( 'woocommerce_shop_manager_editable_roles', 'myextension_shop_manager_role_edit_capabilities' ); 
+        
+# override search query to search only products
+        add_action( 'pre_get_posts', 'overide_posts_query_to_product' );
+
+        function overide_posts_query_to_product( $query ) {
+          if( ! is_admin() && is_search() && $query->is_main_query() ) {
+            $query->set( 'post_type', 'product' );
+          }
+        }
