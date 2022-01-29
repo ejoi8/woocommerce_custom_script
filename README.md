@@ -599,6 +599,8 @@ add to WP Admin > Divi > Theme Options > Integration > Body Code:
 
 # Woocommerce get all order details
 
+        
+        // https://gist.github.com/lukecav/60836976190e2f1ccd8ab15564cbfe9c
         select
             p.ID as order_id,
             p.post_date,
@@ -634,7 +636,8 @@ add to WP Admin > Divi > Theme Options > Integration > Body Code:
             
             
 # Woocommerce get all product details. 
-
+        
+        // https://stackoverflow.com/questions/39776601/sql-query-to-get-all-products-categories-and-meta-data-woocommerce-wordpress
         SELECT 
                 post_id,
                 t.name AS product_category,
