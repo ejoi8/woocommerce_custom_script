@@ -681,13 +681,14 @@ add to WP Admin > Divi > Theme Options > Integration > Body Code:
 	p.post_title,
 	max( CASE WHEN pm.meta_key = 'total_sales' and p.ID = pm.post_id THEN pm.meta_value END ) as total_sales,
 	max( CASE WHEN pm.meta_key = '_stock' and p.ID = pm.post_id THEN pm.meta_value END ) as _stock
-        FROM 
-                zool_posts p 
-           join zool_postmeta pm on p.ID = pm.post_id
-        WHERE 
-                p.post_type = "product"
-                AND p.post_status = "publish" 
-                AND p.post_date BETWEEN '2023-04-01' AND '2023-06-01'
-        GROUP BY p.post_title
+	FROM 
+	   zool_posts p 
+	   join zool_postmeta pm on p.ID = pm.post_id
+	WHERE 
+		p.post_type = "product" 
+		OR p.post_type = "product_variation"
+		AND p.post_status = "publish" 
+		AND p.post_date BETWEEN '2023-04-01' AND '2023-06-01'
+	GROUP BY p.post_title
         
 
