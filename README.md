@@ -662,4 +662,32 @@ add to WP Admin > Divi > Theme Options > Integration > Body Code:
                 AND p.post_status in ("publish")
                 AND IFNULL(SUBSTR((SELECT meta_value FROM S619mavp_postmeta WHERE post_id = pm.post_id AND meta_key = "_product_attributes" LIMIT 1),
                 INSTR((SELECT meta_value FROM S619mavp_postmeta WHERE post_id = pm.post_id AND meta_key = "_product_attributes" LIMIT 1), "is_variation")+16,1),0)=0
+                
+                
+# Woocommerce get item quantity - successful order
+
+        SELECT oi.order_item_id,oi.order_item_name ,COUNT(oi.order_item_name) AS jumlah
+        FROM 
+                zool_woocommerce_order_items oi
+                JOIN zool_posts p ON oi.order_id = p.ID
+        WHERE 
+                p.post_type = "shop_order"
+                AND p.post_status = "wc-processing"  
+                AND p.post_date BETWEEN '2023-04-01' AND '2023-06-01'
+        GROUP BY oi.order_item_name
+        
+# Woocommerce get item ales & stock quantity
+        SELECT 
+	p.post_title,
+	max( CASE WHEN pm.meta_key = 'total_sales' and p.ID = pm.post_id THEN pm.meta_value END ) as total_sales,
+	max( CASE WHEN pm.meta_key = '_stock' and p.ID = pm.post_id THEN pm.meta_value END ) as _stock
+        FROM 
+                zool_posts p 
+           join zool_postmeta pm on p.ID = pm.post_id
+        WHERE 
+                p.post_type = "product"
+                AND p.post_status = "publish" 
+                AND p.post_date BETWEEN '2023-04-01' AND '2023-06-01'
+        GROUP BY p.post_title
+        
 
